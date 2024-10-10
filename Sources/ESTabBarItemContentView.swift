@@ -296,16 +296,42 @@ open class ESTabBarItemContentView: UIView {
             }
         } else {
             if !imageView.isHidden && !titleLabel.isHidden {
-                titleLabel.sizeToFit()
-                imageView.sizeToFit()
-                titleLabel.frame = CGRect.init(x: (w - titleLabel.bounds.size.width) / 2.0 + titlePositionAdjustment.horizontal,
-                                               y: h - titleLabel.bounds.size.height - 1.0 + titlePositionAdjustment.vertical,
-                                               width: titleLabel.bounds.size.width,
-                                               height: titleLabel.bounds.size.height)
-                imageView.frame = CGRect.init(x: (w - imageView.bounds.size.width) / 2.0,
-                                              y: (h - imageView.bounds.size.height) / 2.0 - 6.0,
-                                              width: imageView.bounds.size.width,
-                                              height: imageView.bounds.size.height)
+                let screenWidth = UIScreen.main.bounds.size.width
+                let screenHeight = UIScreen.main.bounds.size.height
+                let scaleFactor = UIScreen.screenWidth / 393
+
+                let imageSize = 32.0 * scaleFactor
+                let labelHeight = 14.0
+                let tabBarTopInset = 6.0
+
+                if screenWidth == 375, screenHeight == 667 {
+                    let additionalTabBarHeight = 9.0
+
+                    let yLabel = h - labelHeight - additionalTabBarHeight
+                    let yImage = (h - imageSize - tabBarTopInset * scaleFactor) / 2.0 - additionalTabBarHeight
+
+                    titleLabel.frame = CGRect.init(x: (w - titleLabel.bounds.size.width) / 2.0 + titlePositionAdjustment.horizontal,
+                                                   y: yLabel,
+                                                   width: titleLabel.bounds.size.width,
+                                                   height: labelHeight)
+
+                    imageView.frame = CGRect.init(x: (w - imageSize) / 2.0,
+                                                  y: yImage,
+                                                  width: imageSize,
+                                                  height: imageSize)
+
+                } else {
+                    titleLabel.sizeToFit()
+                    imageView.sizeToFit()
+                    titleLabel.frame = CGRect.init(x: (w - titleLabel.bounds.size.width) / 2.0 + titlePositionAdjustment.horizontal,
+                                                   y: h - labelHeight - 1.0 + scaleFactor*3,
+                                                   width: titleLabel.bounds.size.width,
+                                                   height: labelHeight)
+                    imageView.frame = CGRect.init(x: (w - imageSize) / 2.0,
+                                                  y: (h - imageSize) / 2.0 - tabBarTopInset,
+                                                  width: imageSize,
+                                                  height: imageSize)
+                }
             } else if !imageView.isHidden {
                 imageView.sizeToFit()
                 imageView.center = CGPoint.init(x: w / 2.0, y: h / 2.0)
