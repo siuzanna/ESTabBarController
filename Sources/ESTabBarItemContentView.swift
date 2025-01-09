@@ -231,7 +231,7 @@ open class ESTabBarItemContentView: UIView {
         let w = self.bounds.size.width
         let h = self.bounds.size.height
         
-        imageView.isHidden = (imageView.image == nil)
+//        imageView.isHidden = (imageView.image == nil)
         titleLabel.isHidden = (titleLabel.text == nil)
 
         if self.itemContentMode == .alwaysTemplate {
