@@ -238,7 +238,7 @@ open class ESTabBarItemContentView: UIView {
             var imageSize: CGFloat = 23.0
             var fontSize: CGFloat = 10.0
 
-            if !imageView.isHidden && !titleLabel.isHidden {
+            if imageView.isHidden == false && titleLabel.isHidden == false {
                 titleLabel.font = UIFont.systemFont(ofSize: fontSize)
                 titleLabel.sizeToFit()
 
@@ -250,12 +250,12 @@ open class ESTabBarItemContentView: UIView {
                                               y: (h - imageSize) / 2.0 - 6.0,
                                               width: imageSize,
                                               height: imageSize)
-            } else if !imageView.isHidden {
+            } else if imageView.isHidden == false {
                 imageView.frame = CGRect.init(x: (w - imageSize) / 2.0,
                                               y: (h - imageSize) / 2.0,
                                               width: imageSize,
                                               height: imageSize)
-            } else if !titleLabel.isHidden {
+            } else if titleLabel.isHidden == false {
                 titleLabel.font = UIFont.systemFont(ofSize: fontSize)
                 titleLabel.sizeToFit()
                 titleLabel.frame = CGRect.init(x: (w - titleLabel.bounds.size.width) / 2.0 + titlePositionAdjustment.horizontal,
@@ -270,7 +270,7 @@ open class ESTabBarItemContentView: UIView {
                 badgeView.setNeedsLayout()
             }
         } else {
-            if !imageView.isHidden && !titleLabel.isHidden {
+            if imageView.isHidden == false && titleLabel.isHidden == false {
                 let scaleFactor = UIScreen.main.bounds.size.width / 393
                 let imageSize = 32.0 * scaleFactor
                 let labelHeight = 14.0 * scaleFactor
@@ -288,10 +288,10 @@ open class ESTabBarItemContentView: UIView {
                                               y: tabBarTopInset - 1,
                                               width: imageSize,
                                               height: imageSize)
-            } else if !imageView.isHidden {
+            } else if imageView.isHidden == false {
                 imageView.sizeToFit()
                 imageView.center = CGPoint.init(x: w / 2.0, y: h / 2.0)
-            } else if !titleLabel.isHidden {
+            } else if titleLabel.isHidden == false {
                 titleLabel.sizeToFit()
                 titleLabel.center = CGPoint.init(x: w / 2.0, y: h / 2.0)
             }
